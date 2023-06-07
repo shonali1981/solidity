@@ -1,0 +1,1258 @@
+{
+  "contractName": "Trade",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "_tradeID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TradeCreated",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_tradeID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addTrade",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_tradeID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getTrade",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"_tradeID\",\"type\":\"bytes32\"}],\"name\":\"TradeCreated\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_tradeID\",\"type\":\"bytes32\"}],\"name\":\"addTrade\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_tradeID\",\"type\":\"bytes32\"}],\"name\":\"getTrade\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/MyNetwork/contracts/Trade.sol\":\"Trade\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/MyNetwork/contracts/Trade.sol\":{\"keccak256\":\"0xcb6af0da1c30a2ffa4cbd29677f875ea88eddbf1d756ce2800f1489430a3aa24\",\"urls\":[\"bzz-raw://bc16d23e59de50fe51bde589e0f87b5318d1df7be80ce2053607d6cc6bada78d\",\"dweb:/ipfs/QmNw6qjDYpY9hh7EJKW8fY3XTT9tXSddcM8nFcBcLmyPNi\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610167806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063a3b137991461003b578063bd8c4a991461007d575b600080fd5b6100676004803603602081101561005157600080fd5b81019080803590602001909291905050506100ab565b6040518082815260200191505060405180910390f35b6100a96004803603602081101561009357600080fd5b81019080803590602001909291905050506100ca565b005b6000806000838152602001908152602001600020600001549050919050565b604051806020016040528082815250600080838152602001908152602001600020600082015181600001559050507f72dbb4020c53749dc8545b23b311eeb1dff0b7c1104f9c22edf39a3c696ad838816040518082815260200191505060405180910390a15056fea265627a7a72315820ae0775e6796c9f5af3298fbadf8cf38dcec317d4a5466b2d308040befc232ca064736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063a3b137991461003b578063bd8c4a991461007d575b600080fd5b6100676004803603602081101561005157600080fd5b81019080803590602001909291905050506100ab565b6040518082815260200191505060405180910390f35b6100a96004803603602081101561009357600080fd5b81019080803590602001909291905050506100ca565b005b6000806000838152602001908152602001600020600001549050919050565b604051806020016040528082815250600080838152602001908152602001600020600082015181600001559050507f72dbb4020c53749dc8545b23b311eeb1dff0b7c1104f9c22edf39a3c696ad838816040518082815260200191505060405180910390a15056fea265627a7a72315820ae0775e6796c9f5af3298fbadf8cf38dcec317d4a5466b2d308040befc232ca064736f6c63430005100032",
+  "sourceMap": "35:471:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;35:471:1;;;;;;;",
+  "deployedSourceMap": "35:471:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;35:471:1;;;;;;;;;;;;;;;;;;;;;;;;385:118;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;385:118:1;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;230:143;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;230:143:1;;;;;;;;;;;;;;;;;:::i;:::-;;385:118;441:7;467:9;:19;477:8;467:19;;;;;;;;;;;:27;;;460:35;;385:118;;;:::o;230:143::-;306:21;;;;;;;;318:8;306:21;;;284:9;:19;294:8;284:19;;;;;;;;;;;:43;;;;;;;;;;;343:22;356:8;343:22;;;;;;;;;;;;;;;;;;230:143;:::o",
+  "source": "pragma solidity >=0.5.1 <0.6.0;\r\n\r\ncontract Trade{\r\n    \r\n    event TradeCreated(bytes32 _tradeID);\r\n    \r\n    struct tradeStruct{\r\n        bytes32 tradeID ;\r\n    }\r\n    \r\n    mapping(bytes32 => tradeStruct) tradeList;\r\n    \r\n    function addTrade(bytes32 _tradeID) public {\r\n        tradeList[_tradeID] = tradeStruct(_tradeID);\r\n        emit TradeCreated(_tradeID);\r\n    }\r\n    \r\n    function getTrade(bytes32 _tradeID) public view returns(bytes32){\r\n        return(tradeList[_tradeID].tradeID);\r\n    }\r\n}",
+  "sourcePath": "D:/MyNetwork/contracts/Trade.sol",
+  "ast": {
+    "absolutePath": "/D/MyNetwork/contracts/Trade.sol",
+    "exportedSymbols": {
+      "Trade": [
+        78
+      ]
+    },
+    "id": 79,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 34,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".1",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:31:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 78,
+        "linearizedBaseContracts": [
+          78
+        ],
+        "name": "Trade",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 38,
+            "name": "TradeCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 37,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 36,
+                  "indexed": false,
+                  "name": "_tradeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38,
+                  "src": "81:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 35,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "81:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "80:18:1"
+            },
+            "src": "62:37:1"
+          },
+          {
+            "canonicalName": "Trade.tradeStruct",
+            "id": 41,
+            "members": [
+              {
+                "constant": false,
+                "id": 40,
+                "name": "tradeID",
+                "nodeType": "VariableDeclaration",
+                "scope": 41,
+                "src": "140:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 39,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "140:7:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "tradeStruct",
+            "nodeType": "StructDefinition",
+            "scope": 78,
+            "src": "111:53:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 45,
+            "name": "tradeList",
+            "nodeType": "VariableDeclaration",
+            "scope": 78,
+            "src": "176:41:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_tradeStruct_$41_storage_$",
+              "typeString": "mapping(bytes32 => struct Trade.tradeStruct)"
+            },
+            "typeName": {
+              "id": 44,
+              "keyType": {
+                "id": 42,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "184:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "176:31:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_tradeStruct_$41_storage_$",
+                "typeString": "mapping(bytes32 => struct Trade.tradeStruct)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 43,
+                "name": "tradeStruct",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 41,
+                "src": "195:11:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_tradeStruct_$41_storage_ptr",
+                  "typeString": "struct Trade.tradeStruct"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 62,
+              "nodeType": "Block",
+              "src": "273:100:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 56,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 50,
+                        "name": "tradeList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 45,
+                        "src": "284:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_tradeStruct_$41_storage_$",
+                          "typeString": "mapping(bytes32 => struct Trade.tradeStruct storage ref)"
+                        }
+                      },
+                      "id": 52,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 51,
+                        "name": "_tradeID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47,
+                        "src": "294:8:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "284:19:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_tradeStruct_$41_storage",
+                        "typeString": "struct Trade.tradeStruct storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 54,
+                          "name": "_tradeID",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 47,
+                          "src": "318:8:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        ],
+                        "id": 53,
+                        "name": "tradeStruct",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 41,
+                        "src": "306:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_tradeStruct_$41_storage_ptr_$",
+                          "typeString": "type(struct Trade.tradeStruct storage pointer)"
+                        }
+                      },
+                      "id": 55,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "306:21:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_tradeStruct_$41_memory",
+                        "typeString": "struct Trade.tradeStruct memory"
+                      }
+                    },
+                    "src": "284:43:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_tradeStruct_$41_storage",
+                      "typeString": "struct Trade.tradeStruct storage ref"
+                    }
+                  },
+                  "id": 57,
+                  "nodeType": "ExpressionStatement",
+                  "src": "284:43:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 59,
+                        "name": "_tradeID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47,
+                        "src": "356:8:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 58,
+                      "name": "TradeCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 38,
+                      "src": "343:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 60,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "343:22:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 61,
+                  "nodeType": "EmitStatement",
+                  "src": "338:27:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 63,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 48,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 47,
+                  "name": "_tradeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 63,
+                  "src": "248:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 46,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "248:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "247:18:1"
+            },
+            "returnParameters": {
+              "id": 49,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "273:0:1"
+            },
+            "scope": 78,
+            "src": "230:143:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 76,
+              "nodeType": "Block",
+              "src": "449:54:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 70,
+                            "name": "tradeList",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 45,
+                            "src": "467:9:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_tradeStruct_$41_storage_$",
+                              "typeString": "mapping(bytes32 => struct Trade.tradeStruct storage ref)"
+                            }
+                          },
+                          "id": 72,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 71,
+                            "name": "_tradeID",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 65,
+                            "src": "477:8:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "467:19:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_tradeStruct_$41_storage",
+                            "typeString": "struct Trade.tradeStruct storage ref"
+                          }
+                        },
+                        "id": 73,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "tradeID",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 40,
+                        "src": "467:27:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "id": 74,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "466:29:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 69,
+                  "id": 75,
+                  "nodeType": "Return",
+                  "src": "460:35:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 77,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 66,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 65,
+                  "name": "_tradeID",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 77,
+                  "src": "403:16:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 64,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "403:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "402:18:1"
+            },
+            "returnParameters": {
+              "id": 69,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 68,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 77,
+                  "src": "441:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 67,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "441:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "440:9:1"
+            },
+            "scope": 78,
+            "src": "385:118:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 79,
+        "src": "35:471:1"
+      }
+    ],
+    "src": "0:506:1"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/D/MyNetwork/contracts/Trade.sol",
+      "exportedSymbols": {
+        "Trade": [
+          78
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.5",
+            ".1",
+            "<",
+            "0.6",
+            ".0"
+          ]
+        },
+        "id": 34,
+        "name": "PragmaDirective",
+        "src": "0:31:1"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            78
+          ],
+          "name": "Trade",
+          "scope": 79
+        },
+        "children": [
+          {
+            "attributes": {
+              "anonymous": false,
+              "documentation": null,
+              "name": "TradeCreated"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_tradeID",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 35,
+                        "name": "ElementaryTypeName",
+                        "src": "81:7:1"
+                      }
+                    ],
+                    "id": 36,
+                    "name": "VariableDeclaration",
+                    "src": "81:16:1"
+                  }
+                ],
+                "id": 37,
+                "name": "ParameterList",
+                "src": "80:18:1"
+              }
+            ],
+            "id": 38,
+            "name": "EventDefinition",
+            "src": "62:37:1"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Trade.tradeStruct",
+              "name": "tradeStruct",
+              "scope": 78,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "tradeID",
+                  "scope": 41,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bytes32",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bytes32",
+                      "type": "bytes32"
+                    },
+                    "id": 39,
+                    "name": "ElementaryTypeName",
+                    "src": "140:7:1"
+                  }
+                ],
+                "id": 40,
+                "name": "VariableDeclaration",
+                "src": "140:15:1"
+              }
+            ],
+            "id": 41,
+            "name": "StructDefinition",
+            "src": "111:53:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "tradeList",
+              "scope": 78,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(bytes32 => struct Trade.tradeStruct)",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(bytes32 => struct Trade.tradeStruct)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bytes32",
+                      "type": "bytes32"
+                    },
+                    "id": 42,
+                    "name": "ElementaryTypeName",
+                    "src": "184:7:1"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "tradeStruct",
+                      "referencedDeclaration": 41,
+                      "type": "struct Trade.tradeStruct"
+                    },
+                    "id": 43,
+                    "name": "UserDefinedTypeName",
+                    "src": "195:11:1"
+                  }
+                ],
+                "id": 44,
+                "name": "Mapping",
+                "src": "176:31:1"
+              }
+            ],
+            "id": 45,
+            "name": "VariableDeclaration",
+            "src": "176:41:1"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "addTrade",
+              "scope": 78,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_tradeID",
+                      "scope": 63,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 46,
+                        "name": "ElementaryTypeName",
+                        "src": "248:7:1"
+                      }
+                    ],
+                    "id": 47,
+                    "name": "VariableDeclaration",
+                    "src": "248:16:1"
+                  }
+                ],
+                "id": 48,
+                "name": "ParameterList",
+                "src": "247:18:1"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 49,
+                "name": "ParameterList",
+                "src": "273:0:1"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct Trade.tradeStruct storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct Trade.tradeStruct storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 45,
+                                  "type": "mapping(bytes32 => struct Trade.tradeStruct storage ref)",
+                                  "value": "tradeList"
+                                },
+                                "id": 50,
+                                "name": "Identifier",
+                                "src": "284:9:1"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 47,
+                                  "type": "bytes32",
+                                  "value": "_tradeID"
+                                },
+                                "id": 51,
+                                "name": "Identifier",
+                                "src": "294:8:1"
+                              }
+                            ],
+                            "id": 52,
+                            "name": "IndexAccess",
+                            "src": "284:19:1"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct Trade.tradeStruct memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_bytes32",
+                                      "typeString": "bytes32"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 41,
+                                  "type": "type(struct Trade.tradeStruct storage pointer)",
+                                  "value": "tradeStruct"
+                                },
+                                "id": 53,
+                                "name": "Identifier",
+                                "src": "306:11:1"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 47,
+                                  "type": "bytes32",
+                                  "value": "_tradeID"
+                                },
+                                "id": 54,
+                                "name": "Identifier",
+                                "src": "318:8:1"
+                              }
+                            ],
+                            "id": 55,
+                            "name": "FunctionCall",
+                            "src": "306:21:1"
+                          }
+                        ],
+                        "id": 56,
+                        "name": "Assignment",
+                        "src": "284:43:1"
+                      }
+                    ],
+                    "id": 57,
+                    "name": "ExpressionStatement",
+                    "src": "284:43:1"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 38,
+                              "type": "function (bytes32)",
+                              "value": "TradeCreated"
+                            },
+                            "id": 58,
+                            "name": "Identifier",
+                            "src": "343:12:1"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 47,
+                              "type": "bytes32",
+                              "value": "_tradeID"
+                            },
+                            "id": 59,
+                            "name": "Identifier",
+                            "src": "356:8:1"
+                          }
+                        ],
+                        "id": 60,
+                        "name": "FunctionCall",
+                        "src": "343:22:1"
+                      }
+                    ],
+                    "id": 61,
+                    "name": "EmitStatement",
+                    "src": "338:27:1"
+                  }
+                ],
+                "id": 62,
+                "name": "Block",
+                "src": "273:100:1"
+              }
+            ],
+            "id": 63,
+            "name": "FunctionDefinition",
+            "src": "230:143:1"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "getTrade",
+              "scope": 78,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_tradeID",
+                      "scope": 77,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 64,
+                        "name": "ElementaryTypeName",
+                        "src": "403:7:1"
+                      }
+                    ],
+                    "id": 65,
+                    "name": "VariableDeclaration",
+                    "src": "403:16:1"
+                  }
+                ],
+                "id": 66,
+                "name": "ParameterList",
+                "src": "402:18:1"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 77,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 67,
+                        "name": "ElementaryTypeName",
+                        "src": "441:7:1"
+                      }
+                    ],
+                    "id": 68,
+                    "name": "VariableDeclaration",
+                    "src": "441:7:1"
+                  }
+                ],
+                "id": 69,
+                "name": "ParameterList",
+                "src": "440:9:1"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 69
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "bytes32"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "tradeID",
+                              "referencedDeclaration": 40,
+                              "type": "bytes32"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct Trade.tradeStruct storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 45,
+                                      "type": "mapping(bytes32 => struct Trade.tradeStruct storage ref)",
+                                      "value": "tradeList"
+                                    },
+                                    "id": 70,
+                                    "name": "Identifier",
+                                    "src": "467:9:1"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 65,
+                                      "type": "bytes32",
+                                      "value": "_tradeID"
+                                    },
+                                    "id": 71,
+                                    "name": "Identifier",
+                                    "src": "477:8:1"
+                                  }
+                                ],
+                                "id": 72,
+                                "name": "IndexAccess",
+                                "src": "467:19:1"
+                              }
+                            ],
+                            "id": 73,
+                            "name": "MemberAccess",
+                            "src": "467:27:1"
+                          }
+                        ],
+                        "id": 74,
+                        "name": "TupleExpression",
+                        "src": "466:29:1"
+                      }
+                    ],
+                    "id": 75,
+                    "name": "Return",
+                    "src": "460:35:1"
+                  }
+                ],
+                "id": 76,
+                "name": "Block",
+                "src": "449:54:1"
+              }
+            ],
+            "id": 77,
+            "name": "FunctionDefinition",
+            "src": "385:118:1"
+          }
+        ],
+        "id": 78,
+        "name": "ContractDefinition",
+        "src": "35:471:1"
+      }
+    ],
+    "id": 79,
+    "name": "SourceUnit",
+    "src": "0:506:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x4F58336cB20d91F5fe3a17BCEC1DF63e4b66Ef3d",
+      "transactionHash": "0x9cc0fed5fb1c89e3f45949adf50e3155d1f8936c8a0254e500f57a07bb4e875f"
+    }
+  },
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-06-28T15:04:58.139Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
